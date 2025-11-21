@@ -6,12 +6,14 @@ int bfs(int s,int t,vector<vector<int>>& M,int V,vector<int>& parent)
     q.push({s,100000000});
     vector<int> marked(V,0);
     marked[s]=1;
-    int curr,f;
+    int curr,f,m=-1;
     while(!q.empty())
     {
         curr=q.front().first;
         f=q.front().second;
         q.pop();
+        if(curr==t && m<f)
+            m=f;
         for(int i=0;i<V;i++)
         {
             if(M[curr][i]>0 && marked[i]==0)
@@ -24,7 +26,7 @@ int bfs(int s,int t,vector<vector<int>>& M,int V,vector<int>& parent)
     }
     if(parent[t]==-1)
         return 0;
-    return f;
+    return m;
 }
 int f(int s,int t,vector<vector<int>> M,int V)
 {
